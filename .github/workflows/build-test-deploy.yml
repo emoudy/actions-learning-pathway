@@ -57,13 +57,6 @@ jobs:
       - run: npm install
       - run: npm run build
 
-      - name: Warm up upload-artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: dummy-artifact
-          path: ./README.md
-        continue-on-error: true
-
       - name: upload artifacts
         uses: actions/upload-pages-artifact@v0
         with: 
