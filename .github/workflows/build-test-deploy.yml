@@ -1,7 +1,17 @@
 name: build-test-deploy
 on: push
-jobs: 
+jobs:
+  preload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: preload upload-artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: noop
+          path: .gitignore
+        continue-on-error: true
   build:
+    needs: preload
     runs-on: ubuntu-latest
     steps: 
       - name: Check out repository code
