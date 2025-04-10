@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "next lint --no-interactive",
-    "lint": "next lint --no-interactive"
+    "test": "next lint",
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "14.2.21",
