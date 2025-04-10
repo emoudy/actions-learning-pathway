@@ -8,6 +8,12 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.config({
     extends: ['next/core-web-vitals'],
+		plugins: ['@typescript-eslint'],
+    rules: {
+      // Add your rules here
+      'no-console': 'warn',
+      'react/react-in-jsx-scope': 'off', // not needed in Next.js
+    },
   }),
 ]
 
