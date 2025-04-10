@@ -24,7 +24,7 @@ jobs:
           node-version: '18.x'
       - run: npm install
       - run: npm test
-  deploy:
+  pages-build-deployment:
     needs: test
     runs-on: ubuntu-latest
 
