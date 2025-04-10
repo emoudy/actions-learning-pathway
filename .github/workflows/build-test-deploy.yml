@@ -1,63 +1,24 @@
 name: build-test-deploy
 on: push
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps: 
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - name: use node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
       - run: npm install
       - run: npm run build
+
   test: 
     needs: build
     runs-on: ubuntu-latest
     steps: 
-      - name: checkout repo
-        uses: actions/checkout@v3
-      - name: use node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
       - run: npm install
       - run: npm test
-  pages-build-deployment:
-    needs: test
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-  
-    environment:
-      name: production
-      url: ${{ steps.deployment.outputs.page_url }}
-  
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-  
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-  
-      - name: Install dependencies
-        run: npm install
-  
-      - name: Build project
-        run: npm run build
-  
-      - name: Upload static site (artifact)
-        uses: actions/upload-pages-artifact@v0
-        with:
-          path: ./out
-          name: github-pages
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
